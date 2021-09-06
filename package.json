@@ -1,0 +1,28 @@
+{
+  "name": "acompas",
+  "version": "1.0.0",
+  "description": "Departamento de Acompañamiento",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrianfazio-UNAHUR/acompaS.git"
+  },
+  "author": "Campagno - Fazio - de la Fuente",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adrianfazio-UNAHUR/acompaS/issues"
+  },
+  "homepage": "https://github.com/adrianfazio-UNAHUR/acompaS#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql2": "^2.3.0",
+    "sequelize": "^6.6.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12",
+    "sequelize-cli": "^6.2.0"
+  }
+}
