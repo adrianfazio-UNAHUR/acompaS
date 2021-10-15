@@ -1,0 +1,116 @@
+@startuml Modelo Relacional
+' hide the spot
+hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity "Carreras" as carreras {
+  *carrera_id : integer, generated <<PK>>
+  --
+  *carrera_nombre: varchar(128), not null
+  *carrera_departamento: integer, not null <<FK>>
+}
+
+entity "Categorias" as categorias {
+  *categoria_id : integer, generated <<PK>>
+  --
+  *categoria_nombre: varchar(128), not null
+}
+
+entity "Derivadores" as derivadores {
+  *derivador_id : integer, generated <<PK>>
+  --
+  *persona_id : integer, not null <<FK>>
+}
+
+entity "Departamentos" as departamentos {
+  *departamentoa_id : integer, generated <<PK>>
+  --
+  *departamentoa_nombre: varchar(128), not null
+}
+
+entity "Documento_tipos" as documento_tipos {
+  *documento_tipo : integer, generated <<PK>>
+  --
+  *documento_tipo_nombre : varchar(128), not null
+}
+
+entity "Entrevistas" as entrevistas {
+  *entrevista_id : integer, generated <<PK>>
+  --
+  *orientador_id: integer, not null <<FK>
+  *observacion: varchar(1024), not null 
+  *accion: varchar(1024), not null 
+  *entrevista_fecha_hora:  dateTime, not null
+}
+
+entity "Estados" as estados {
+  *estado_id : integer, generated <<PK>>
+  --
+  *estado_nombre: varchar(128), not null
+  *color: varchar(64), not null
+}
+
+entity "Orientadores" as orientadores {
+  *orienatdor_id : integer, generated <<PK>>
+  --
+  *persona_id : integer, not null <<FK>>
+}
+
+entity "Personas" as personas {
+  *persona_id : integer, generated <<PK>>
+  --
+  *persona_nombre : varchar(64),
+  *persona_apellido : varchar(64),
+  *persona_tipo_documento : integer, not null <<FK>>
+  *persona_nro_documento : varchar(64), not null
+  *persona_email : varchar(64), not nul
+  *persona_telefono : varchar(64), not null
+  *genero: varchar(64), not null
+  *persona_carrera : integer, not null <<FK>>
+}
+
+entity "Seguimientos" as seguimientos {
+  *seguimientoid : integer, generated <<PK>>
+  --
+  *estado_id : integer, not null <<FK>>
+  *entrevista_id : integer, not null  <<FK>>
+  *categoria_id : integer, not null  <<FK>>
+  *orientador_id : integer, not null  <<FK>>
+  *derivador_id : integer, not null  <<FK>>
+  *seguimiento_tipo_id: integer, not null  <<FK>>
+  *acompaniamiento_id: integer, not null  <<FK>>
+  *seguimiento_motivo_id: integer, not null  <<FK>>
+}
+
+entity "Usuarios" as usuarios {
+  *usuario_id : integer, generated <<PK>>
+  --
+  *persona_id : integer, not null <<FK>>
+}
+
+
+
+departamentos |o..|| carreras
+
+documento_tipos |o..o| personas
+
+entrevistas |o..|| orientadores
+
+personas ||..o| carreras
+personas ||..|| derivadores
+personas ||..|| orientadores
+personas ||..|| usuarios
+
+
+seguimientos |o..|| categorias
+seguimientos |o..o| derivadores
+seguimientos |o..|| entrevistas
+seguimientos |o..o| orientadores
+seguimientos |o..o| usuarios
+seguimientos |o..|| estados
+
+
+@enduml
+
