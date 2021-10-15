@@ -1,6 +1,8 @@
+
 const express = require('express');
 const app = express();
-const sequelize = require('./database/db');
+const sequelize = require('../database/db');
+
 
 //Configuracion
 const PORT = process.env.PORT || 3000;
@@ -15,6 +17,7 @@ app.use(express.urlencoded({ extended: false }))
 app.get('/', function (req, res) {
     res.json("Hola mundo")
 });
+
 
 // Arranque servidor
 app.listen(PORT, function () {
